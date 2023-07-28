@@ -26,7 +26,7 @@ jobs:
               sudo systemctl enable --now farm
               sudo systemctl status farm
               sudo systemctl restart farm.service
-              echo "Deploy completed"             
+              echo "Deploy completed!"             
          
            
       
