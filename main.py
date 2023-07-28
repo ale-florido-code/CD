@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "<h1 style='color:blue'>Hello There!</h1>"
+    return "<h1 style='color:blue'>Hello!</h1>"
 
 @app.route('/farm')
 def farm():
