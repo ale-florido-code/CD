@@ -10,27 +10,23 @@ jobs:
   deploy:
      runs-on: ubuntu-latest  
      steps:
-         - name: Set up SSH
-           uses: webfactory/ssh-agent@v0.5.0
-           with:
-              ssh-private-key: ${{ secrets.SSHKEY }}
-              
-         - name: Deploy Flask app to Digital Ocean
-           uses: appleboy/ssh-action@v0.1.4
-           with:
-             host: ${{ secrets.HOST }}
-             username: ${{ secrets.USERNAME }}
-             key: ${{ secrets.SSHKEY }}
-             port: ${{ secrets.PORT }}
-             script: |
-               echo "Now to the server"
-               cd /home/CD/Assignment-CD
-               git pull
-               sudo systemctl enable --now farm
-               sudo systemctl status farm
-               sudo systemctl restart farm.service
-               echo "Deploy completed"
-             
+        - name: Checkout repository
+          uses: actions/checkout@v3 #checkout the repository content to github runner
+        - name: Deploy Flask app to Digital Ocean
+          uses: appleboy/ssh-action@v0.1.4
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.SSHKEY }}
+            port: ${{ secrets.PORT }}
+            script: |
+              echo "Now to the server"
+              cd /home/CD/Assignment-CD
+              git pull
+              sudo systemctl enable --now farm
+              sudo systemctl status farm
+              sudo systemctl restart farm.service
+              echo "Deploy completed"             
          
            
       
